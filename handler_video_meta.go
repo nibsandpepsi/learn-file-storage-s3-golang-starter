@@ -39,7 +39,7 @@ func (cfg *apiConfig) handlerVideoMetaCreate(w http.ResponseWriter, r *http.Requ
 		respondWithError(w, http.StatusInternalServerError, "Couldn't create video", err)
 		return
 	}
-
+	
 	respondWithJSON(w, http.StatusCreated, video)
 }
 
@@ -95,6 +95,7 @@ func (cfg *apiConfig) handlerVideoGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+
 	respondWithJSON(w, http.StatusOK, video)
 }
 
@@ -109,12 +110,14 @@ func (cfg *apiConfig) handlerVideosRetrieve(w http.ResponseWriter, r *http.Reque
 		respondWithError(w, http.StatusUnauthorized, "Couldn't validate JWT", err)
 		return
 	}
-
+	
 	videos, err := cfg.db.GetVideos(userID)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Couldn't retrieve videos", err)
 		return
 	}
+	
 
 	respondWithJSON(w, http.StatusOK, videos)
 }
+
